@@ -14,6 +14,5 @@ pipelines:
             - name: incoming_webhook_rb
         execution:
           onExecute:
-            - echo "job triggered by resource-> $step_triggered_by_resource_name"
-            - echo "$res_  - name: incoming_hook_rb_payload" | jq '.' > payload.json
-            - echo "$(read_json payload.json my.nested.object)"
+            - echo "$res_incoming_webhook_demo_payload" | jq '.' > payload.json
+            - read_json payload.json "Hello"
