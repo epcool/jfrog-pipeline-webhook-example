@@ -1,0 +1,19 @@
+resources:
+  - name: incoming_basic_hook
+    type: IncomingWebhook
+    configuration:
+      webhookName: in_hook_basic
+ 
+pipelines:
+  - name: incoming_webhook_demo
+    steps:
+      - name: start_by_hook
+        type: Bash
+        configuration:
+          inputResources:
+            - name: incoming_basic_hook
+        execution:
+          onExecute:
+            - echo "job triggered by resource-> $step_triggered_by_resource_name"
+            - echo "$res_incoming_basic_hook_payload" | jq '.' > payload.json
+            - echo "$(read_json payload.json my.nested.object)"
