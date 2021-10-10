@@ -8,7 +8,7 @@ pipelines:
   - name: incoming_webhook_demo
     steps:
       - name: start_by_hook
-        type: string
+        type: bash
         configuration:
           inputResources:
             - name: incoming_webhook_rb
