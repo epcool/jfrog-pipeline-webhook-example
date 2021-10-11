@@ -1,8 +1,8 @@
 resources:
-  - name: incoming_webhook_rb
+  - name: incoming_webhook_rb_res
     type: IncomingWebhook
     configuration:
-      webhookName: incoming_hook_rb
+      webhookName: icoming_wehook_RB_signed
  
 pipelines:
   - name: incoming_webhook_demo
@@ -11,7 +11,7 @@ pipelines:
         type: bash
         configuration:
           inputResources:
-            - name: incoming_webhook_rb
+            - name: incoming_webhook_rb_res
         execution:
           onExecute:
             - echo "$res_incoming_webhook_demo_payload" | jq '.' > payload.json
