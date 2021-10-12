@@ -8,15 +8,17 @@ resources:
 pipelines:
   - name: incoming_webhook_RBS
     steps:
-      - name: start_by_hook
-        type: bash
+      - name: step_1
+        type: Bash
         configuration:
           inputResources:
-            - name: incoming_webhook_rb_res
+            - name: from_artifactory
+          integrations:
+            - name: myArtifactory
         execution:
-          onStart:
-            - echo "start runing RB signed demo"
-
-          onExecute:
-            - echo "$res_incoming_webhook_RBS_payload" | jq '.' > payload.json
-            - read_json payload.json "Hello"
+            onExecute:
+              - echo "$res_from_artifactory_payload" | jq '.' > payload.json
+              - rb_name=$(read_json payload.json 'data.release_bundle_name')
+              - rb_ver=$(read_json payload.json 'data.release_bundle_version')
+              - rb_prop ="${rb_name}/${rb_ver}"
+              - echo $rb_prop
