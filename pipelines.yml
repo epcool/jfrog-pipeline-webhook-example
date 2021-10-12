@@ -1,5 +1,5 @@
 resources:
-  - name: incoming_webhook_rb_res
+  - name: incoming_webhook_rb_res__
     type: IncomingWebhook
     configuration:
       webhookName: incoming_webhook_RB_signed
