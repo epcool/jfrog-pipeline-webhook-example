@@ -14,8 +14,8 @@ pipelines:
           inputResources:
             - name: incoming_webhook_rb_res
         execution:
-        onStart:
-          - echo "start runing RB signed demo"
+          onStart:
+            - echo "start runing RB signed demo"
 
           onExecute:
             - echo "$res_incoming_webhook_RBS_payload" | jq '.' > payload.json
