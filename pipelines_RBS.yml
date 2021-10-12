@@ -20,5 +20,6 @@ pipelines:
               - rb_name=$(read_json payload.json 'data.release_bundle_name')
               - echo $rb_name
               - rb_ver=$(read_json payload.json 'data.release_bundle_version')
-              - echo $re_ver > C:\jfrogcli\pipelog.txt
+              - print "hello"
+              - print rb_ver
               
