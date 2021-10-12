@@ -20,10 +20,11 @@ pipelines:
             onExecute:
               - retry_command jfrog rt config add --artifactory-url $int_global_arti_url --user $int_global_arti_user --apikey $int_global_arti_apikey --interactive=false
               - echo "$res_from_artifactory_payload" | jq '.' > payload.json
+              - rb_path = "release-bundles"
               - rb_name=$(read_json payload.json 'data.release_bundle_name')
               - echo $rb_name
               - rb_ver=$(read_json payload.json 'data.release_bundle_version')
-              - downloadfile="release-bundles/${rb_name}/${rb_ver}"
+              - downloadfile="${rb_path}/${rb_name}/${rb_ver}"
               - echo $downloadfile
               - jfrog rt dl $downloadfile /
               - ls -la
