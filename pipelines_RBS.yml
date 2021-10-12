@@ -20,6 +20,7 @@ pipelines:
               - rb_name=$(read_json payload.json 'data.release_bundle_name')
               - echo $rb_name
               - rb_ver=$(read_json payload.json 'data.release_bundle_version')
-              - print "hello"
+              - print("hello")
+              - print(rb_ver)
               - print rb_ver
               
