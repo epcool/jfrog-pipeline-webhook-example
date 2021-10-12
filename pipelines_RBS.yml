@@ -18,6 +18,7 @@ pipelines:
             onExecute:
               - echo "$res_from_artifactory_payload" | jq '.' > payload.json
               - rb_name=$(read_json payload.json 'data.release_bundle_name')
+              - echo $rb_name
               - rb_ver=$(read_json payload.json 'data.release_bundle_version')
-              - rb_prop ="${rb_name}/${rb_ver}"
-              - echo $rb_prop
+              - echo $re_ver
+              
