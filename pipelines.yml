@@ -2,7 +2,7 @@ resources:
   - name: incoming_webhook_rb_res
     type: IncomingWebhook
     configuration:
-      webhookName: icoming_wehook_RB_signed
+      webhookName: incoming_webhook_RB_signed
  
 pipelines:
   - name: incoming_webhook_demo
