@@ -12,9 +12,8 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: from_artifactory
-          integrations:
-            - name: myArtifactory
+            - name: incoming_webhook_rb_res
+
         execution:
             onExecute:
               - echo "$res_from_artifactory_payload" | jq '.' > payload.json
