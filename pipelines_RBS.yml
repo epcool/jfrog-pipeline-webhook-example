@@ -6,7 +6,7 @@ resources:
       webhookName: incoming_webhook_RB_signed
  
 pipelines:
-  - name: incoming_webhook_demo
+  - name: incoming_webhook_RBS
     steps:
       - name: start_by_hook
         type: bash
@@ -15,5 +15,5 @@ pipelines:
             - name: incoming_webhook_rb_res
         execution:
           onExecute:
-            - echo "$res_incoming_webhook_demo_payload" | jq '.' > payload.json
+            - echo "$res_incoming_webhook_RBS_payload" | jq '.' > payload.json
             - read_json payload.json "Hello"
