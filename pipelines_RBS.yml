@@ -13,6 +13,8 @@ pipelines:
         configuration:
           inputResources:
             - name: incoming_webhook_rb_res
+          integrations:
+           - name: global_arti
 
         execution:
             onExecute:
