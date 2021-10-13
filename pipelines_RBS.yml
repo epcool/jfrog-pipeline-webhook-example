@@ -25,4 +25,7 @@ pipelines:
               - echo $rb_ver
               - downloadfile="release-bundles/${rb_name}/${rb_ver}"
               - echo $downloadfile
+              - artiserver=$(read_json payload.json 'jpd_origin')  
+              - echo $artiserver
+              - echo $payload.json
               
