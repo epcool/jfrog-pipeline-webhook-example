@@ -35,6 +35,5 @@ pipelines:
               - curl -u $rest_auth "$rest_get" | jq '.' > tmpbundleinfo.json
               - mkdir -p "./${rb_name}/${rb_ver}"
               - cd "${rb_name}/${rb_ver}"
-              - type nul > bundleinfo.json
               - echo "${tmpbundleinfo.json}" > bundleinfo.json
              
