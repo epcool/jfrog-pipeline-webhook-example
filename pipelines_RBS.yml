@@ -23,4 +23,6 @@ pipelines:
               - echo $rb_name
               - rb_ver=$(read_json payload.json 'data.release_bundle_version')
               - echo $rb_ver
+              - downloadfile="release-bundles/${rb_name}/${rb_ver}"
+              - echo $downloadfile
               
