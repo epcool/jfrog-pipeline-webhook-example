@@ -47,6 +47,9 @@ pipelines:
               - echo $rest_auth
               - curl -u $rest_auth "$rest_get"
               - curl -u $rest_auth "$rest_get" | jq '.' > bundle.json
+              - path="${res_GitRepo_res_path}"
+              - echo $path
+              - cd $path
               - cp bundle.json 
               - npm run app.js
 
