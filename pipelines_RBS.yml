@@ -26,10 +26,10 @@ pipelines:
         configuration:
           inputResources:
             - name: incoming_webhook_RB_signed_res
+            - name: GitRepo_res
           integrations:
            - name: global_arti
-           - name: GitRepo_res
-
+           
         execution:
             onExecute:
               - echo "$res_incoming_webhook_RB_signed_res_payload" | jq '.' > payload.json
