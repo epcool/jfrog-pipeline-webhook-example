@@ -32,5 +32,10 @@ pipelines:
               - rest_auth="${int_global_arti_user}:${int_global_arti_apikey}"
               - echo $rest_auth
               - curl -u $rest_auth "$rest_get"
-              - curl -u $rest_auth "$rest_get" | jq '.' > bundleinfo.json
+              - curl -u $rest_auth "$rest_get" | jq '.' > tmpbundleinfo.json
+              - cd C:\Jfrogcli
+              - mkdir -p "${rb_name}/${rb_ver}""
+              - cd "${rb_name}/${rb_ver}"
+              - type nul > bundleinfo.json
+              - echo "${tmpbundleinfo.json}" > bundleinfo.json
              
