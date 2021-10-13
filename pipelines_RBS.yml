@@ -1,10 +1,23 @@
+template: true   # required for local templates
+valuesFilePath: ./values.yml
 
 resources:
+  - name: GitRepo_res
+    type: GitRepo
+    configuration:
+      # SCM integration where the repository is located
+      gitProvider: {{ .Values.myRepo.gitProvider }} # this will be replaced from values.yml
+      # Repository path, including org name/repo name
+      path: {{ .Values.myRepo.path }} # this will be replaced from values.yml
+      branches:
+        # Specifies which branches will trigger dependent steps
+        include: master
+
   - name: incoming_webhook_RB_signed_res
     type: IncomingWebhook
     configuration:
       webhookName: incoming_webhook_RB_signed
- 
+
 pipelines:
   - name: incoming_webhook_RBS_pipe
     steps:
@@ -33,7 +46,9 @@ pipelines:
               - echo $rest_auth
               - curl -u $rest_auth "$rest_get"
               - curl -u $rest_auth "$rest_get" | jq '.' > bundle.json
-              - mkdir -p "./${rb_name}/${rb_ver}"
-              - cd "${rb_name}/${rb_ver}"
+              - cp bundle.json 
+              ///// git integ
+              - npm run app.js
+
               
              

@@ -1,0 +1,3 @@
+myRepo:
+  gitProvider: epcool
+  path: epcool/jfrog-pipeline-webhook-example
