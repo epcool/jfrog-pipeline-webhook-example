@@ -47,7 +47,6 @@ pipelines:
               - curl -u $rest_auth "$rest_get"
               - curl -u $rest_auth "$rest_get" | jq '.' > bundle.json
               - cp bundle.json 
-              ///// git integ
               - npm run app.js
 
               
