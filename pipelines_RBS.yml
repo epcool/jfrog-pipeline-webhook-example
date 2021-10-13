@@ -29,7 +29,7 @@ pipelines:
               - echo $artiserver
               - rest_get="${artiserver}/distribution/api/v1/release_bundle/${rb_name}/${rb_ver}"
               - echo $rest_get
-              - rest_auth="${int_myArtifactory_user}:${int_myArtifactory_apikey}"
+              - rest_auth="${int_global_arti_user}:${int_global_arti_apikey}"
               - echo $rest_auth
-              - $curl -u $rest_auth "$rest_get"
+              - curl -u $rest_auth "$rest_get"
              
