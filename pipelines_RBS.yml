@@ -33,8 +33,7 @@ pipelines:
               - echo $rest_auth
               - curl -u $rest_auth "$rest_get"
               - curl -u $rest_auth "$rest_get" | jq '.' > tmpbundleinfo.json
-              - cd C:\Jfrogcli
-              - mkdir -p "${rb_name}/${rb_ver}""
+              - mkdir -p "./${rb_name}/${rb_ver}""
               - cd "${rb_name}/${rb_ver}"
               - type nul > bundleinfo.json
               - echo "${tmpbundleinfo.json}" > bundleinfo.json
