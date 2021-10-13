@@ -32,8 +32,8 @@ pipelines:
               - rest_auth="${int_global_arti_user}:${int_global_arti_apikey}"
               - echo $rest_auth
               - curl -u $rest_auth "$rest_get"
-              - curl -u $rest_auth "$rest_get" | jq '.' > tmpbundleinfo.json
+              - curl -u $rest_auth "$rest_get" | jq '.' > bundle.json
               - mkdir -p "./${rb_name}/${rb_ver}"
               - cd "${rb_name}/${rb_ver}"
-              - echo "${tmpbundleinfo.json}" > bundleinfo.json
+              
              
