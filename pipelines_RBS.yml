@@ -27,5 +27,9 @@ pipelines:
               - echo $downloadfile
               - artiserver=$(read_json payload.json 'jpd_origin')  
               - echo $artiserver
-              - echo $payload.json
-              
+              - rest_get="${artiserver}/distribution/api/v1/release_bundle/${rb_name}/${rb_ver}"
+              - echo $rest_get
+              - rest_auth="${int_myArtifactory_user}:${int_myArtifactory_apikey}"
+              - echo $rest auth
+              - $ curl -u $rest auth "$rest_get"
+             
