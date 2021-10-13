@@ -28,6 +28,7 @@ pipelines:
             - name: incoming_webhook_RB_signed_res
           integrations:
            - name: global_arti
+           - name: GitRepo_res
 
         execution:
             onExecute:
