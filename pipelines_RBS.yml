@@ -110,8 +110,11 @@ pipelines:
             #- rb_test2=$(read_json artifacts.json 'docker.repoName')
             #- echo $rb_test2
             #
-            - sudo apt update 
-            - sudo apt install nodejs=14.18.0 -V
+            #- sudo apt update 
+            #- sudo apt install nodejs=14.18.0 -V
+
+            - curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+            - sudo apt-get install -y nodej
             #- sudo apt install npm
             - npm install
             - node ./app1.js
