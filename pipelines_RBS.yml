@@ -86,12 +86,15 @@ pipelines:
             - rest_auth="${res_propertyBag_res_auth_key}"
             - echo $rb_info_restq
             - echo $rest_auth
-
+            - tmp1="t1"
+            - tmp2="t2"
             - curl -u $rest_auth "$rest_get"
             - curl -u $rest_auth "$rest_get" | jq '.' > bundle.json
-            - curl -u $rest_auth "$rest_get" | jq '.docker.repoName' > stderr
-            - echo $stderr
-            - curl -u $rest_auth "$rest_get" | jq '.docker.repoName'
+            - curl -u $rest_auth "$rest_get" | jq '.' > tmp1
+            - echo $tmp1
+            - curl -u $rest_auth "$rest_get" | jq '.docker.repoName' > tmp2
+            - echo $stmp2
+            
             
 
 
