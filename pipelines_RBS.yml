@@ -79,13 +79,13 @@ pipelines:
           inputResources:
           - name: propertyBag_res
           - name: GitRepo_res
-          runtime:
-            type: image
-            image:
-              auto:
-                language: nodejs
-                versions:
-                  - "10.16.3"
+          #runtime:
+          #  type: image
+          #  image:
+          #    auto:
+          #      language: nodejs
+          #      versions:
+          #        - "10.16.3"
           
         execution:
           onExecute:
@@ -107,10 +107,12 @@ pipelines:
             - rb_test2=$(read_json artifacts.json 'docker.repoName')
             - echo $rb_test2
             #
+            - sudo apt update 
+            - sudo apt install nodejs
+            - sudo apt install npm
             - npm install
             - node ./app.js
-            #- sudo apt install nodejs
-            #- sudo apt install npm
+
 
 
             - curl -u $rest_auth "$rest_get" | jq '.' > tmp1
