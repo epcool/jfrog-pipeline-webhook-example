@@ -63,7 +63,7 @@ pipelines:
               - echo $res_path
 
               - write_output propertyBag_res property1=${rest_auth}
-              - write_output propertyBag_res property2=${bundle.json}
+             
 
 
 
@@ -77,10 +77,10 @@ pipelines:
         execution:
           onExecute:
             - get-variable -name property1
-            - get-variable -name property2
+           
             - echo propertyBag_res
             - echo "${res_propertyBag_res_property1}"
-            - echo "$res_propertyBag_res_property2" | jq '.' > payload.json
+          
 
             - cp bundle.json 
             - npm run app.js
