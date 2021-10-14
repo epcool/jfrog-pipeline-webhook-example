@@ -100,7 +100,7 @@ pipelines:
             
         execution:
           onExecute:
-            - write-output "executing step..."
+            - fs_path="${res_FileSpec_res_resourcePath}"
 
 #    onExecute:
 #      - cd $res_src_resourcePath
