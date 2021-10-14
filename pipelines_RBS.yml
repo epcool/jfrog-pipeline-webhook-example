@@ -29,9 +29,17 @@ resources:
     configuration:
       sourceArtifactory: global_arti
       target: 'C:\Jfrogcli'
-      aql: "{items.find:{'release_artifact.release.name':'demo-delete','release_artifact.release.version':'1.31'}}"
-  
-      
+      aql:   
+        "'files':[
+            {
+              'aql': {
+                'items.find': {
+                  'release_artifact.release.name': 'demo-delete',
+                  'release_artifact.release.version': '1.31'
+                }
+              }
+            }
+          ]"
 
 pipelines:
 
@@ -102,7 +110,7 @@ pipelines:
             
         execution:
           onExecute:
-            #- fs_path="${res_FileSpec_res_resourcePath}"
+            - fs_path="${res_FileSpec_res_resourcePath}"
 
 #    onExecute:
 #      - cd $res_src_resourcePath
