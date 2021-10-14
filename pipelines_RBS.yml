@@ -95,7 +95,7 @@ pipelines:
         configuration:
           inputResources:
             - name: FileSpec_res
-            - name: propertyBag_res
+            
         execution:
           onExecute:
             - write-output "executing step..."
