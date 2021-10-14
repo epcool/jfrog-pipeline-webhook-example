@@ -2,7 +2,7 @@ const fs = require('fs').promises
 
 const artifactoryUrl = 'rtest1.jfrog.io'
 const filename = './bundle.json'
-console.log(`Helo app 1`) 
+console.log(`Helo app 1 `) 
 const main = async () => {
     const data = JSON.parse(await fs.readFile(filename));
     const { artifacts } = data;
