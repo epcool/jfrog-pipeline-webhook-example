@@ -6,8 +6,8 @@ const filename = './bundle.json'
 const main = async () => {
     const data = JSON.parse(await fs.readFile(filename));
     const { artifacts } = data;
-    const dockerArtifacts = artifacts.filter(a=>a.repo_path?.endsWith('manifest.json'))
-                            .map(a=>a.repo_path
+    const dockerArtifacts = artifacts.filter(a=>a.sourceRepoPath?.endsWith('manifest.json'))
+                            .map(a=>a.sourceRepoPath
                             .split('/'))
                             .map(a=>{
                                 // remove file name
