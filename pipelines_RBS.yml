@@ -21,22 +21,20 @@ resources:
   - name: propertyBag_res
     type: PropertyBag
     configuration:
-      property1: ""
-      property2: ""
+      rb_info_restq: ""
+      auth_key: ""
       
 
 pipelines:
   - name: incoming_webhook_RBS_pipe
     steps:
-      - name: step_1
+      - name: get_rb_path
         type: Bash
         configuration:
           inputResources:
             - name: incoming_webhook_RB_signed_res
-            - name: GitRepo_res
           outputResources:
             - name: propertyBag_res
-
           integrations:
            - name: global_arti
            
@@ -44,41 +42,42 @@ pipelines:
             onExecute:
               - echo "$res_incoming_webhook_RB_signed_res_payload" | jq '.' > payload.json
               - rb_name=$(read_json payload.json 'data.release_bundle_name')
-              - echo $rb_name
+              #- echo $rb_name
               - rb_ver=$(read_json payload.json 'data.release_bundle_version')
-              - echo $rb_ver
+              #- echo $rb_ver
               - downloadfile="release-bundles/${rb_name}/${rb_ver}"
-              - echo $downloadfile
+              #- echo $downloadfile
               - artiserver=$(read_json payload.json 'jpd_origin')  
-              - echo $artiserver
+              #- echo $artiserver
               - rest_get="${artiserver}/distribution/api/v1/release_bundle/${rb_name}/${rb_ver}"
-              - echo $rest_get
+              #- echo $rest_get
               - rest_auth="${int_global_arti_user}:${int_global_arti_apikey}"
-              - echo $rest_auth
-              - curl -u $rest_auth "$rest_get"
-              - curl -u $rest_auth "$rest_get" | jq '.' > bundle.json
-              - path="${res_GitRepo_res_path}"
-              - echo $path
-              - res_path="${res_GitRepo_res_resourcePath}"
-              - echo $res_path
-
-              - write_output propertyBag_res property1=${rest_auth}
-             
-
-
-
-              
-      - name: step_2
+              #- echo $rest_auth  
+              - write_output propertyBag_res rb_info_restq=${rest_get}
+              - write_output propertyBag_res auth_key=${rest_auth}
+                       
+      - name: get_bundle_info
         type: Bash
         configuration:
           inputResources:
           - name: propertyBag_res
+          - name: GitRepo_res
           
         execution:
           onExecute:
-            - prop1="${res_propertyBag_res_property1}"
-            - echo $prop1
+            - rest_get="${res_propertyBag_res_rb_info_restq}"
+            - rest_auth="${res_propertyBag_res_rb_info_auth_key}"
+            - echo $rb_info_restq
+            - echo $rest_auth
 
+            - curl -u $rest_auth "$rest_get"
+            - curl -u $rest_auth "$rest_get" | jq '.' > bundle.json
+
+
+            - path="${res_GitRepo_res_path}"
+            - echo $path
+            - res_path="${res_GitRepo_res_resourcePath}"
+            - echo $res_path
           
 
             #- cp bundle.json 
