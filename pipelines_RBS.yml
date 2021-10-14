@@ -76,6 +76,8 @@ pipelines:
       - name: get_bundle_info
         type: Bash
         configuration:
+          inputSteps:
+          - name: get_bundle_info
           inputResources:
           - name: propertyBag_res
           - name: GitRepo_res
