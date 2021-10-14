@@ -35,15 +35,6 @@ pipelines:
 
   - name: incoming_webhook_RBS_pipe
     steps:
-      - name: step_FLSPEC_0013
-        type: PowerShell
-        configuration:
-          inputResources:
-            - name: FileSpec_res
-        execution:
-          onExecute:
-            - write-output "executing step..."
-
       - name: get_rb_path
         type: Bash
         configuration:
@@ -99,7 +90,15 @@ pipelines:
 
             #- cp bundle.json 
             #- npm run app.js
-
+      - name: step_FLSPEC_0013
+        type: PowerShell
+        configuration:
+          inputResources:
+            - name: FileSpec_res
+            - name: propertyBag_res
+        execution:
+          onExecute:
+            - write-output "executing step..."
 
 #    onExecute:
 #      - cd $res_src_resourcePath
