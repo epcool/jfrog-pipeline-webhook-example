@@ -91,6 +91,8 @@ pipelines:
             - curl -u $rest_auth "$rest_get"
             - curl -u $rest_auth "$rest_get" | jq '.' > bundle.json
             - curl -u $rest_auth "$rest_get" | jq '.' > tmp1
+            - curl -u $rest_auth "$rest_get" | jq '.' | cat
+            - curl -u $rest_auth "$rest_get" | jq '.' | cat > tmp1
             - echo $tmp1
             - curl -u $rest_auth "$rest_get" | jq '.docker|.repoName' > tmp2
             - echo $stmp2
