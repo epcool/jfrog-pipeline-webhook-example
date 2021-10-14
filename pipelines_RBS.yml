@@ -90,7 +90,7 @@ pipelines:
 
             #- cp bundle.json 
             #- npm run app.js
-      - name: step_FLSPEC_0013
+      - name: step_fs_test
         type: bash
         configuration:
           inputResources:
