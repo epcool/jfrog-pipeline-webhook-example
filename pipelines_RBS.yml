@@ -33,18 +33,18 @@ resources:
 
 pipelines:
 
-  - name: step_FLSPEC_0013
-      type: PowerShell
-      configuration:
-        nodePool: win_2019
-        inputResources:
-          - name: FileSpec_0013
-      execution:
-        onExecute:
-          - write-output "executing step..."
-
   - name: incoming_webhook_RBS_pipe
     steps:
+      - name: step_FLSPEC_0013
+        type: PowerShell
+        configuration:
+        nodePool: win_2019
+          inputResources:
+            - name: FileSpec_0013
+        execution:
+          onExecute:
+            - write-output "executing step..."
+
       - name: get_rb_path
         type: Bash
         configuration:
