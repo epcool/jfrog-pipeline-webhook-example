@@ -18,8 +18,6 @@ resources:
     configuration:
       webhookName: incoming_webhook_RB_signed
 
-      
-resources:
   - name: propertyBag_res
     type: PropertyBag
     configuration:
