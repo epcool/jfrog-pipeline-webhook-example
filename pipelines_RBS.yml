@@ -93,6 +93,8 @@ pipelines:
       - name: step_fs_test
         type: bash
         configuration:
+          inputSteps:
+            - name: get_bundle_info
           inputResources:
             - name: FileSpec_res
             
