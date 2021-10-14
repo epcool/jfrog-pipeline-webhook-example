@@ -81,7 +81,7 @@ pipelines:
 
           
 
-            - cp bundle.json 
-            - npm run app.js
+            #- cp bundle.json 
+            #- npm run app.js
 
 
