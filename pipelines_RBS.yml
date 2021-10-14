@@ -91,7 +91,7 @@ pipelines:
             #- cp bundle.json 
             #- npm run app.js
       - name: step_FLSPEC_0013
-        type: PowerShell
+        type: bash
         configuration:
           inputResources:
             - name: FileSpec_res
