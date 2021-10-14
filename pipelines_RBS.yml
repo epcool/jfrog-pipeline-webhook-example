@@ -23,9 +23,26 @@ resources:
     configuration:
       rb_info_restq: ""
       auth_key: ""
+
+  - name: FileSpec_res
+    type: FileSpec
+    configuration:
+      sourceArtifactory: global_arti
+      target: 'C:\Jfrogcli'
       
 
 pipelines:
+
+  - name: step_FLSPEC_0013
+      type: PowerShell
+      configuration:
+        nodePool: win_2019
+        inputResources:
+          - name: FileSpec_0013
+      execution:
+        onExecute:
+          - write-output "executing step..."
+
   - name: incoming_webhook_RBS_pipe
     steps:
       - name: get_rb_path
@@ -59,13 +76,6 @@ pipelines:
       - name: get_bundle_info
         type: Bash
         configuration:
-          runtime:
-            type: image
-            image:
-              auto:
-                language: nodejs
-                versions:
-                  - "10.16.3"
           inputResources:
           - name: propertyBag_res
           - name: GitRepo_res
