@@ -76,7 +76,7 @@ pipelines:
           
         execution:
           onExecute:
-            - prop1 = "${res_propertyBag_res_property1}"
+            - prop1="${res_propertyBag_res_property1}"
             - echo $prop1
 
           
