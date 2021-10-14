@@ -101,8 +101,10 @@ pipelines:
             - tmp2="t2"
             - curl -u $rest_auth "$rest_get"
             - curl -u $rest_auth "$rest_get" | jq '.' > bundle.json
-            - rb_test=$(read_json bundle.json 'docker.repoName')
-            - echo $rb_test
+            - curl -u $rest_auth "$rest_get" | jq '.' > bundle.json | cat
+            - curl -u $rest_auth "$rest_get" | jq '.' | cat
+            #- rb_test=$(read_json bundle.json 'docker.repoName')
+            #- echo $rb_test
             #- curl -u $rest_auth "$rest_get" | jq '.artifacts[3].props' > artifacts.json 
             #- rb_test2=$(read_json artifacts.json 'docker.repoName')
             #- echo $rb_test2
