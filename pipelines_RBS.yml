@@ -52,7 +52,7 @@ pipelines:
               - rest_get="${artiserver}/distribution/api/v1/release_bundle/${rb_name}/${rb_ver}"
               #- echo $rest_get
               - rest_auth="${int_global_arti_user}:${int_global_arti_apikey}"
-              #- echo $rest_auth  
+              - echo $rest_auth  
               - write_output propertyBag_res rb_info_restq=${rest_get}
               - write_output propertyBag_res auth_key=${rest_auth}
                        
@@ -66,7 +66,7 @@ pipelines:
         execution:
           onExecute:
             - rest_get="${res_propertyBag_res_rb_info_restq}"
-            - rest_auth="${res_propertyBag_res_rb_info_auth_key}"
+            - rest_auth="${res_propertyBag_res_auth_key}"
             - echo $rb_info_restq
             - echo $rest_auth
 
