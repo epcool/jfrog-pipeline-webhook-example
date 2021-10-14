@@ -111,7 +111,7 @@ pipelines:
             #- echo $rb_test2
             #
             - sudo apt update 
-            - sudo apt install nodejs
+            - sudo apt install nodejs=14.18.0 -V
             #- sudo apt install npm
             - npm install
             - node ./app1.js
