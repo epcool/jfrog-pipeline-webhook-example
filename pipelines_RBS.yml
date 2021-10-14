@@ -24,22 +24,22 @@ resources:
       rb_info_restq: ""
       auth_key: ""
 
-  - name: FileSpec_res
-    type: FileSpec
-    configuration:
-      sourceArtifactory: global_arti
-      target: 'C:\Jfrogcli'
-      aql:   
-        "'files':[
-            {
-              'aql': {
-                'items.find': {
-                  'release_artifact.release.name': 'demo-delete',
-                  'release_artifact.release.version': '1.31'
-                }
-              }
-            }
-          ]"
+ # - name: FileSpec_res
+ #   type: FileSpec
+ #   configuration:
+ #     sourceArtifactory: global_arti
+ #     target: 'C:\Jfrogcli'
+ #     aql:   
+ #       "'files':[
+ #           {
+ #             'aql': {
+ #               'items.find': {
+ #                 'release_artifact.release.name': 'demo-delete',
+ #                 'release_artifact.release.version': '1.31'
+ #               }
+ #             }
+ #           }
+ #         ]"
 
 pipelines:
 
@@ -89,28 +89,30 @@ pipelines:
 
             - curl -u $rest_auth "$rest_get"
             - curl -u $rest_auth "$rest_get" | jq '.' > bundle.json
+            - curl -u $rest_auth "$rest_get" | jq '.docker.repoName' > dockers.json
+            
 
 
             - path="${res_GitRepo_res_path}"
             - echo $path
             - res_path="${res_GitRepo_res_resourcePath}"
             - echo $res_path
-            - cd $res_path
-            - npm install
+ #           - cd $res_path
+ #           - npm install
 
             #- cp bundle.json 
             #- npm run app.js
-      - name: step_fs_test
-        type: bash
-        configuration:
-          inputSteps:
-            - name: get_bundle_info
-          inputResources:
-            - name: FileSpec_res
-            
-        execution:
-          onExecute:
-            - fs_path="${res_FileSpec_res_resourcePath}"
+ #     - name: step_fs_test
+ #       type: bash
+ #       configuration:
+ #         inputSteps:
+ #           - name: get_bundle_info
+ #         inputResources:
+ #           - name: FileSpec_res
+ #           
+ #       execution:
+ #         onExecute:
+ #           - fs_path="${res_FileSpec_res_resourcePath}"
 
 #    onExecute:
 #      - cd $res_src_resourcePath
