@@ -69,20 +69,20 @@ pipelines:
 
               
       - name: step_2
-          type: Bash
-          configuration:
-            inputResources:
-            - name: propertyBag_res
-           
-          execution:
-            onExecute:
-              - get-variable -name property1
-              - get-variable -name property2
-              - echo propertyBag_res
-              - echo "${res_propertyBag_res_property1}"
-              - echo "$res_propertyBag_res_property2" | jq '.' > payload.json
+        type: Bash
+        configuration:
+          inputResources:
+          - name: propertyBag_res
+          
+        execution:
+          onExecute:
+            - get-variable -name property1
+            - get-variable -name property2
+            - echo propertyBag_res
+            - echo "${res_propertyBag_res_property1}"
+            - echo "$res_propertyBag_res_property2" | jq '.' > payload.json
 
-              - cp bundle.json 
-              - npm run app.js
+            - cp bundle.json 
+            - npm run app.js
 
 
