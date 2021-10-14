@@ -18,6 +18,15 @@ resources:
     configuration:
       webhookName: incoming_webhook_RB_signed
 
+      
+resources:
+  - name: propertyBag_res
+    type: PropertyBag
+    configuration:
+      property1: ""
+      property2: ""
+      
+
 pipelines:
   - name: incoming_webhook_RBS_pipe
     steps:
@@ -27,6 +36,9 @@ pipelines:
           inputResources:
             - name: incoming_webhook_RB_signed_res
             - name: GitRepo_res
+          outputResources:
+            - name: propertyBag_res
+
           integrations:
            - name: global_arti
            
@@ -52,8 +64,27 @@ pipelines:
               - res_path="${res_GitRepo_res_resourcePath}"
               - echo $res_path
 
+              - write_output propertyBag_res property1=${rest_auth}
+              - write_output propertyBag_res property2=${bundle.json}
+
+
+
+              
+      - name: step_2
+          type: Bash
+          configuration:
+            inputResources:
+            - name: propertyBag_res
+           
+          execution:
+            onExecute:
+              - get-variable -name property1
+              - get-variable -name property2
+              - echo propertyBag_res
+              - echo "${res_propertyBag_res_property1}"
+              - echo "$res_propertyBag_res_property2" | jq '.' > payload.json
+
               - cp bundle.json 
               - npm run app.js
 
-              
-             
+
