@@ -114,7 +114,7 @@ pipelines:
             - sudo apt install nodejs
             #- sudo apt install npm
             - npm install
-            - node ./app.js
+            - node ./app1.js
 
 
 
