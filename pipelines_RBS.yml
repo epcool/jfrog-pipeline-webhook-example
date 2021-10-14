@@ -40,7 +40,7 @@ pipelines:
         configuration:
           nodePool: win_2019
           inputResources:
-            - name: FileSpec_0013
+            - name: FileSpec_res
         execution:
           onExecute:
             - write-output "executing step..."
