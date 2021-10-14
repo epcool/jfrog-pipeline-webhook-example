@@ -109,7 +109,7 @@ pipelines:
             #- sudo apt install nodejs=14.18.0 -V
             - sudo chmod 1777 /tmp
             - curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-            - sudo apt-get install -y nodej
+            - sudo apt-get install -y nodejs
             #- sudo apt install npm
             - npm install
             - node ./app1.js
