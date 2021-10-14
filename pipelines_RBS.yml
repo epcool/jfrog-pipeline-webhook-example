@@ -95,6 +95,7 @@ pipelines:
             - curl -u $rest_auth "$rest_get" | jq '.' | cat > tmp1
             - echo $tmp1
             - curl -u $rest_auth "$rest_get" | jq '.docker|.repoName' > tmp2
+            - curl -u $rest_auth "$rest_get" | jq '.docker|.repoName' | cat
             - echo $stmp2
             
             
