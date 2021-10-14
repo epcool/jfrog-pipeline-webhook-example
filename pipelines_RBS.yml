@@ -59,6 +59,13 @@ pipelines:
       - name: get_bundle_info
         type: Bash
         configuration:
+          runtime:
+            type: image
+            image:
+              auto:
+                language: nodejs
+                versions:
+                  - "10.16.3"
           inputResources:
           - name: propertyBag_res
           - name: GitRepo_res
@@ -78,9 +85,16 @@ pipelines:
             - echo $path
             - res_path="${res_GitRepo_res_resourcePath}"
             - echo $res_path
-          
+            - cd $res_path
+            - npm install
 
             #- cp bundle.json 
             #- npm run app.js
 
 
+#    onExecute:
+#      - cd $res_src_resourcePath
+#      - npm install
+#     - mkdir -p testresults && mkdir -p codecoverage
+#     - $res_src_resourceP
+#
