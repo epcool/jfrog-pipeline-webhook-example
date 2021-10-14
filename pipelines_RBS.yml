@@ -89,6 +89,10 @@ pipelines:
           
         execution:
           onExecute:
+            - res_path="${res_GitRepo_res_resourcePath}"
+            - echo $res_path
+            - cd $res_GitRepo_res_resourcePath
+            #
             - rest_get="${res_propertyBag_res_rb_info_restq}"
             - rest_auth="${res_propertyBag_res_auth_key}"
             - echo $rb_info_restq
@@ -102,9 +106,12 @@ pipelines:
             - curl -u $rest_auth "$rest_get" | jq '.artifacts[3].props' > artifacts.json 
             - rb_test2=$(read_json artifacts.json 'docker.repoName')
             - echo $rb_test2
-            - sudo apt install nodejs
-            - sudo apt install npm
+            #
+            - npm install
             - node ./app.js
+            #- sudo apt install nodejs
+            #- sudo apt install npm
+
 
             - curl -u $rest_auth "$rest_get" | jq '.' > tmp1
             - curl -u $rest_auth "$rest_get" | jq '.' | cat
