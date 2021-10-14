@@ -79,14 +79,7 @@ pipelines:
           inputResources:
           - name: propertyBag_res
           - name: GitRepo_res
-          #runtime:
-          #  type: image
-          #  image:
-          #    auto:
-          #      language: nodejs
-          #      versions:
-          #        - "10.16.3"
-          ##
+
           
         execution:
           onExecute:
