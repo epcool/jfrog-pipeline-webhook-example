@@ -76,10 +76,9 @@ pipelines:
           
         execution:
           onExecute:
-            - get-variable -name property1
-           
-            - echo propertyBag_res
-            - echo "${res_propertyBag_res_property1}"
+            - prop1 = "${res_propertyBag_res_property1}"
+            - echo $prop1
+
           
 
             - cp bundle.json 
