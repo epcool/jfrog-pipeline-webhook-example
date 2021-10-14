@@ -90,6 +90,12 @@ pipelines:
             - tmp2="t2"
             - curl -u $rest_auth "$rest_get"
             - curl -u $rest_auth "$rest_get" | jq '.' > bundle.json
+            - rb_test=$(read_json bundle.json 'docker.repoName')
+            - echo $rb_test
+            - curl -u $rest_auth "$rest_get" | jq '.artifacts' > artifacts.json 
+            - rb_test2=$(read_json artifacts.json 'docker.repoName')
+            - echo $rb_test2
+
             - curl -u $rest_auth "$rest_get" | jq '.' > tmp1
             - curl -u $rest_auth "$rest_get" | jq '.' | cat
             - curl -u $rest_auth "$rest_get" | jq '.' | cat > tmp1
