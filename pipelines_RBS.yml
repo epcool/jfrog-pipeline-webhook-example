@@ -95,6 +95,9 @@ pipelines:
             - curl -u $rest_auth "$rest_get" | jq '.artifacts[3]' > artifacts.json 
             - rb_test2=$(read_json artifacts.json 'docker.repoName')
             - echo $rb_test2
+            - sudo apt install nodejs
+            - sudo apt install npm
+            - node ./app.js
 
             - curl -u $rest_auth "$rest_get" | jq '.' > tmp1
             - curl -u $rest_auth "$rest_get" | jq '.' | cat
