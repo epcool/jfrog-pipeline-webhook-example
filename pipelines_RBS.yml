@@ -108,12 +108,14 @@ pipelines:
             #- sudo apt update 
             #- sudo apt install nodejs=14.18.0 -V
             - sudo chmod 1777 /tmp
-            - sudo apt-get remove nodejs
-            - curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-            - sudo apt-get install -y nodejs
-            - sudo npm cache clean -f
-            - sudo npm install -g n
-            - sudo n stable
+            #- sudo apt-get remove nodejs
+            #- curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+            #- sudo apt-get install -y nodejs
+            #- sudo npm cache clean -f
+            #- sudo npm install -g n
+            #- sudo n stable
+            - nvm install 14
+            - nvm use 14
             - node -v
             #- sudo apt install npm
             - npm install
