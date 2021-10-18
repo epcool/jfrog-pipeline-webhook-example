@@ -1,24 +1,21 @@
 template: true   # required for local templates
 valuesFilePath: ./values.yml
 
-resources:
-  - name: GitRepo_res
+resources: # resources needed for this pipeline
+  - name: GitRepo_res  # SCM integration
     type: GitRepo
     configuration:
-      # SCM integration where the repository is located
-      gitProvider: {{ .Values.myRepo.gitProvider }} # this will be replaced from values.yml
-      # Repository path, including org name/repo name
-      path: {{ .Values.myRepo.path }} # this will be replaced from values.yml
+      gitProvider: {{ .Values.myRepo.gitProvider }} # SCM integration where the repository is located
+      path: {{ .Values.myRepo.path }} # Repository path, including org name/repo name
       branches:
-        # Specifies which branches will trigger dependent steps
-        include: main
+        include: main  # Specifies which branches will trigger dependent steps
 
-  - name: incoming_webhook_RB_signed_res
+  - name: incoming_webhook_RB_signed_res  # webhook integration, when ever RB is signed
     type: IncomingWebhook
     configuration:
       webhookName: incoming_webhook_RB_signed
 
-  - name: propertyBag_res
+  - name: propertyBag_res # properety bag for transfering data between steps
     type: PropertyBag
     configuration:
       rb_info_restq: ""
@@ -41,7 +38,7 @@ resources:
  #           }
  #         ]"
 
-pipelines:
+pipelines: # pipeline definition
 
   - name: incoming_webhook_RBS_pipe
     steps:
@@ -62,7 +59,7 @@ pipelines:
               #- echo $rb_name
               - rb_ver=$(read_json payload.json 'data.release_bundle_version')
               #- echo $rb_ver
-              - downloadfile="release-bundles/${rb_name}/${rb_ver}"
+              #- downloadfile="release-bundles/${rb_name}/${rb_ver}"
               #- echo $downloadfile
               - artiserver=$(read_json payload.json 'jpd_origin')  
               #- echo $artiserver
@@ -81,7 +78,6 @@ pipelines:
           inputResources:
           - name: propertyBag_res
           - name: GitRepo_res
-
           
         execution:
           onExecute:
@@ -93,8 +89,8 @@ pipelines:
             - rest_auth="${res_propertyBag_res_auth_key}"
             - echo $rb_info_restq
             - echo $rest_auth
-            - tmp1="t1"
-            - tmp2="t2"
+            #- tmp1="t1"
+            #- tmp2="t2"
             - curl -u $rest_auth "$rest_get"
             - curl -u $rest_auth "$rest_get" | jq '.' > bundle.json
             - curl -u $rest_auth "$rest_get" | jq '.' > bundle.json | cat
@@ -107,50 +103,57 @@ pipelines:
             #
             #- sudo apt update 
             #- sudo apt install nodejs=14.18.0 -V
-            - sudo chmod 1777 /tmp
+            #- sudo chmod 1777 /tmp
             #- sudo apt-get remove nodejs
             #- curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
             #- sudo apt-get install -y nodejs
             #- sudo npm cache clean -f
             #- sudo npm install -g n
             #- sudo n stable
+            
+            - sudo chmod 1777 /tmp
             - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-
             - source ~/.nvm/nvm.sh
             - source ~/.bashrc
+
             #- export NVM_DIR="$HOME/.nvm"
             #- [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
             #- [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
             - nvm install 14
-
             - nvm use 14
             - node -v
             #- sudo apt install npm
             - npm install
-            - node ./app1.js
+            - node ./app1.js >> tofile.txt
+            - cat tofile.txt
+            - while read in; do chmod 755 "$in"; done < tofile.txt
 
 
 
-            - curl -u $rest_auth "$rest_get" | jq '.' > tmp1
-            - curl -u $rest_auth "$rest_get" | jq '.' | cat
-            - curl -u $rest_auth "$rest_get" | jq '.' | cat > tmp1
-            - echo $tmp1
-            - curl -u $rest_auth "$rest_get" | jq '.docker|.repoName' > tmp2
-            - curl -u $rest_auth "$rest_get" | jq '.docker|.repoName' | cat
-            - echo $stmp2
+            # 1. create bash - done
+            # q. docker login -  yarden will check
+            # 2. install aws cli, aws configure (with S3 res) - yarden will check
+            # 3. copy to bucket - aws s3 cp 
+            #aws s3 cp 81b0f486a199e649e1c911500274f8795c4e4028 s3://yardeng-bucket-europe/artifactory/filestore/81/
+
+
+
+            #- curl -u $rest_auth "$rest_get" | jq '.' > tmp1
+            #- curl -u $rest_auth "$rest_get" | jq '.' | cat
+            #- curl -u $rest_auth "$rest_get" | jq '.' | cat > tmp1
+            #- echo $tmp1
+            #- curl -u $rest_auth "$rest_get" | jq '.docker|.repoName' > tmp2
+            #- curl -u $rest_auth "$rest_get" | jq '.docker|.repoName' | cat
+            #- echo $stmp2
             
             
 
 
-            - path="${res_GitRepo_res_path}"
-            - echo $path
-            - res_path="${res_GitRepo_res_resourcePath}"
-            - echo $res_path
- #           - cd $res_path
- #           - npm install
+           # - path="${res_GitRepo_res_path}"
+           # - echo $path
+           # - res_path="${res_GitRepo_res_resourcePath}"
+           # - echo $res_path
 
-            #- cp bundle.json 
-            #- npm run app.js
  #     - name: step_fs_test
  #       type: bash
  #       configuration:
