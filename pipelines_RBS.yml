@@ -51,6 +51,7 @@ pipelines: # pipeline definition
             - name: propertyBag_res
           integrations:
            - name: global_arti
+           - name: Arteplus
            
         execution:
             onExecute:
@@ -125,6 +126,11 @@ pipelines: # pipeline definition
             #- sudo apt install npm
             - npm install
             - node ./app1.js >> tofile.txt
+
+            - echo "hello world" >> uploadme.txt 
+            - aws s3 cp uploadme.txt s3://testS3/uploadme.txt
+            - aws s3 ls s3://testS3/
+
             - cat tofile.txt
             - while read in; do chmod 755 "$in"; done < tofile.txt
 
