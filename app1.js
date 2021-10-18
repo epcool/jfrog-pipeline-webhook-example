@@ -13,11 +13,15 @@ const main = async () => {
                                 // remove file name
                                 a.pop()
                                 const tag = a.pop();
-                                const repository = a.shift()
-                                const image = a.join('/')
+                                //const repository = a.shift()
+                                //const image = a.join('/')
+                                const image = a.pop()
+                                const repository = a.pop()
+                                
                                 const fullImage = `${artifactoryUrl}/${repository}/${image}:${tag}`
                                 return  fullImage;
                             });
+
     for (let image of dockerArtifacts) {
         console.log(`docker pull ${image}`)
         const regex = /[\/\:\.]/ig
