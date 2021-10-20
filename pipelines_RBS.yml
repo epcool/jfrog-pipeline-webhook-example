@@ -55,19 +55,16 @@ pipelines: # pipeline definition
            
         execution:
             onExecute:
-              - echo "$res_incoming_webhook_RB_signed_res_payload" | jq '.' > payload.json
-              - rb_name=$(read_json payload.json 'data.release_bundle_name')
-              #- echo $rb_name
-              - rb_ver=$(read_json payload.json 'data.release_bundle_version')
-              #- echo $rb_ver
-              #- downloadfile="release-bundles/${rb_name}/${rb_ver}"
-              #- echo $downloadfile
-              - artiserver=$(read_json payload.json 'jpd_origin')  
-              #- echo $artiserver
+              # get RB data from webhook
+              - echo "$res_incoming_webhook_RB_signed_res_payload" | jq '.' > payload.json 
+              - rb_name=$(read_json payload.json 'data.release_bundle_name') # extract RB name
+              - rb_ver=$(read_json payload.json 'data.release_bundle_version') # extract RB version
+              - artiserver=$(read_json payload.json 'jpd_origin') # get srtifactory server details 
+              # parse REST command to get RB spec
               - rest_get="${artiserver}/distribution/api/v1/release_bundle/${rb_name}/${rb_ver}"
-              #- echo $rest_get
+              # parse auth detailes
               - rest_auth="${int_global_arti_user}:${int_global_arti_apikey}"
-              - echo $rest_auth  
+              # wrtie to propery bag for next pipe step  
               - write_output propertyBag_res rb_info_restq=${rest_get}
               - write_output propertyBag_res auth_key=${rest_auth}
                        
@@ -79,60 +76,46 @@ pipelines: # pipeline definition
           inputResources:
           - name: propertyBag_res
           - name: GitRepo_res
+          - name: global_arti
           
         execution:
           onExecute:
-            - res_path="${res_GitRepo_res_resourcePath}"
-            - echo $res_path
-            - cd $res_GitRepo_res_resourcePath
-            #
+            #- res_path="${res_GitRepo_res_resourcePath}"
+            #- echo $res_path
+            #- cd $res_GitRepo_res_resourcePath
+            
+            # get ret cmd & auth from bag
             - rest_get="${res_propertyBag_res_rb_info_restq}"
             - rest_auth="${res_propertyBag_res_auth_key}"
             - echo $rb_info_restq
             - echo $rest_auth
-            #- tmp1="t1"
-            #- tmp2="t2"
-            - curl -u $rest_auth "$rest_get"
-            - curl -u $rest_auth "$rest_get" | jq '.' > bundle.json
-            - curl -u $rest_auth "$rest_get" | jq '.' > bundle.json | cat
-            - curl -u $rest_auth "$rest_get" | jq '.' | cat
-            #- rb_test=$(read_json bundle.json 'docker.repoName')
-            #- echo $rb_test
-            #- curl -u $rest_auth "$rest_get" | jq '.artifacts[3].props' > artifacts.json 
-            #- rb_test2=$(read_json artifacts.json 'docker.repoName')
-            #- echo $rb_test2
-            #
-            #- sudo apt update 
-            #- sudo apt install nodejs=14.18.0 -V
-            #- sudo chmod 1777 /tmp
-            #- sudo apt-get remove nodejs
-            #- curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-            #- sudo apt-get install -y nodejs
-            #- sudo npm cache clean -f
-            #- sudo npm install -g n
-            #- sudo n stable
+
+            #- curl -u $rest_auth "$rest_get"
+            #- curl -u $rest_auth "$rest_get" | jq '.' > bundle.json
+            #- curl -u $rest_auth "$rest_get" | jq '.' > bundle.json | cat
             
+            # get RB spev via REST
+            - curl -u $rest_auth "$rest_get" | jq '.' | cat
+            
+            # install npm 14 on node machine
             - sudo chmod 1777 /tmp
             - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
             - source ~/.nvm/nvm.sh
             - source ~/.bashrc
-
-            #- export NVM_DIR="$HOME/.nvm"
-            #- [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-            #- [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
             - nvm install 14
             - nvm use 14
             - node -v
             #- sudo apt install npm
             - npm install
+            # parse spec to get docker name & tag
             - node ./app1.js >> tofile.txt
 
-            - echo "hello world" >> uploadme.txt 
-            - aws s3 cp uploadme.txt s3://testS3/uploadme.txt
-            - aws s3 ls s3://testS3/
+            #- echo "hello world" >> uploadme.txt 
+            #- aws s3 cp uploadme.txt s3://testS3/uploadme.txt
+            #- aws s3 ls s3://testS3/
 
             - cat tofile.txt
-            - while read in; do chmod 755 "$in"; done < tofile.txt
+            #- while read in; do chmod 755 "$in"; done < tofile.txt
 
 
 
