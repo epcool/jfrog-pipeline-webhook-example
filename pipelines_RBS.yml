@@ -81,9 +81,9 @@ pipelines: # pipeline definition
           
         execution:
           onExecute:
-            #- res_path="${res_GitRepo_res_resourcePath}"
-            #- echo $res_path
-            #- cd $res_GitRepo_res_resourcePath
+            - res_path="${res_GitRepo_res_resourcePath}"
+            - echo $res_path
+            - cd $res_GitRepo_res_resourcePath
             
             # get ret cmd & auth from bag
             - rest_get="${res_propertyBag_res_rb_info_restq}"
