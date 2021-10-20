@@ -92,7 +92,7 @@ pipelines: # pipeline definition
             - echo $rest_auth
 
             #- curl -u $rest_auth "$rest_get"
-            #- curl -u $rest_auth "$rest_get" | jq '.' > bundle.json
+            - curl -u $rest_auth "$rest_get" | jq '.' > bundle.json
             #- curl -u $rest_auth "$rest_get" | jq '.' > bundle.json | cat
             
             # get RB spev via REST
