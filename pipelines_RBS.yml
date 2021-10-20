@@ -98,6 +98,10 @@ pipelines: # pipeline definition
             # get RB spev via REST
             - curl -u $rest_auth "$rest_get" | jq '.' | cat
             
+            #            - jfrog rt docker-pull my-docker-registry.io/my-docker-image:latest docker-local 
+
+            - jfrog rt docker-pull rtest1.jfrog.io/hkube-docker/busybox:latest
+
             # install npm 14 on node machine
             - sudo chmod 1777 /tmp
             - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
@@ -109,7 +113,10 @@ pipelines: # pipeline definition
             #- sudo apt install npm
             - npm install
             # parse spec to get docker name & tag
+                      
             - node ./app1.js
+
+
 
             #- node ./app1.js >> tofile.txt
             #- echo "hello world" >> uploadme.txt 
