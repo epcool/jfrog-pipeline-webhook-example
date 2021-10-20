@@ -76,6 +76,7 @@ pipelines: # pipeline definition
           inputResources:
           - name: propertyBag_res
           - name: GitRepo_res
+          integrations:
           - name: global_arti
           
         execution:
