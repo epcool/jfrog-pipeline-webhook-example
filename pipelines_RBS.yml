@@ -75,7 +75,7 @@ pipelines: # pipeline definition
             
             # get RB spev via REST
             - curl -u $rest_auth "$rest_get" | jq '.' > bundle.json
-            #- curl -u $rest_auth "$rest_get" | jq '.' | cat
+            - curl -u $rest_auth "$rest_get" | jq '.' | cat
             
             - ls -lah
             - add_run_files bundle.json my_file
