@@ -125,7 +125,7 @@ pipelines: # pipeline definition
           onStart:
             - docker images
             - docker login --username $int_global_arti_user --password $int_global_arti_apikey $int_global_arti_url
-            - docker pull rtest1.jfrog.io/artifactory/test-docker/busybox
+            - docker pull rtest1.jfrog.io/test-docker/busybox
             #- docker images
             #- docker save gittalabs.jfrog.io/docker/busybox -o busybox.tar.gz
             - ls -lah
