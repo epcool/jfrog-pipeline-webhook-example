@@ -104,9 +104,9 @@ pipelines: # pipeline definition
             - npm install
             # parse spec to get docker name & tag
                       
-            #- node ./app1.js
-            - node ./app1.js >> spec.txt
-            - write_output propertyBag_spec version_spec=${spec.txt}
+            - node ./app1.js
+            #- node ./app1.js >> spec.txt
+            #- write_output propertyBag_spec version_spec=${spec.txt}
 
       - name: docker
         type: Bash
