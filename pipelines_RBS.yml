@@ -51,7 +51,7 @@ pipelines: # pipeline definition
             - name: propertyBag_res
           integrations:
            - name: global_arti
-           - name: Arteplus
+
            
         execution:
             onExecute:
@@ -121,6 +121,7 @@ pipelines: # pipeline definition
             - name: get_bundle_info
           integrations:
             - name: global_arti
+            - name: Arteplus
         execution:
           onStart:
             - docker images
@@ -129,6 +130,10 @@ pipelines: # pipeline definition
             - docker images
             - docker save rtest1.jfrog.io/test-docker/busybox:1.34.0 -o busybox1340.tar.gz
             - ls -lah
+
+            - aws s3 mb s3://mybucket
+            - aws s3 cp busybox1340.tar.gz s3://mybucket/busybox1340.tar.gz
+            - aws s3 ls s3://mybucket
 
             #- node ./app1.js >> tofile.txt
             #- echo "hello world" >> uploadme.txt 
