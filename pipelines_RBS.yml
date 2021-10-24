@@ -125,6 +125,8 @@ pipelines: # pipeline definition
             - docker pull rtest1.jfrog.io/test-docker/busybox:1.34.0
             - docker pull rtest1.jfrog.io/test-docker/busybox:1.33.0
             - docker images
+            - docker save rtest1.jfrog.io/test-docker/busybox:1.34.0 -o busybox1340.tar.gz 
+            - docker save rtest1.jfrog.io/test-docker/busybox:1.33.0 -o busybox1330.tar.gz 
             #- docker save rtest1.jfrog.io/test-docker/busybox:1.34.0 -o busybox1340.tar.gz | gzip > version.tar.gz
             #- docker save rtest1.jfrog.io/test-docker/busybox:1.33.0 -o busybox1330.tar.gz | gzip > version.tar.gz
             #- docker save rtest1.jfrog.io/test-docker/busybox:1.33.0 -o | gzip > version2.tar.gz
