@@ -91,7 +91,7 @@ pipelines: # pipeline definition
             - curl -u $rest_auth "$rest_get" | jq '.' | cat
             
             - ls -lah
-            add_run_files bundle.json my_file
+            - add_run_files bundle.json my_file
             
             #- jfrog rt docker-pull my-docker-registry.io/my-docker-image:latest docker-local 
 
@@ -118,7 +118,7 @@ pipelines: # pipeline definition
             - echo $res_path
             - cd $res_GitRepo_res_resourcePath
 
-            restore_run_files my_file bundle.json
+            - restore_run_files my_file bundle.json
             # install npm 14 on node machine
             - sudo chmod 1777 /tmp
             - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
