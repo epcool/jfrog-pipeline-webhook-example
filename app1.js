@@ -23,12 +23,12 @@ const main = async () => {
                             });
 
     for (let image of dockerArtifacts) {
-        console.log(`- docker pull ${image}`)
+        console.log(`docker pull ${image}`)
         const regex = /[\/\:\.]/ig
         const dockerFileName=image.replace(regex,'_')
         // console.log(`docker save ${image} | gzip -c > ${dockerFileName}.tgz`)
         // console.log(`docker save -o ${dockerFileName}.tar ${image}`)
-        console.log(`- docker save ${image}-o ${dockerFileName}.tar.gz` )
+        console.log(`docker save ${image}-o ${dockerFileName}.tar.gz` )
 
     }
 }
