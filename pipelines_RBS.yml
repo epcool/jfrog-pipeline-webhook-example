@@ -135,7 +135,7 @@ pipelines: # pipeline definition
             
             - tar -czvf version.tgz *.tar.gz
             - ls -lah
-            - tar -ztvf version.tar.gz
+            - tar -ztvf version.tgz
             # - tar -ztvf version2.tar.gz
             - tar -tvf busybox1340.tar.gz
 
