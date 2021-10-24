@@ -114,7 +114,19 @@ pipelines: # pipeline definition
                       
             - node ./app1.js
 
-
+      - name: docker
+        type: Bash
+        configuration:
+          integrations:
+            - name: global_arti
+        execution:
+          onStart:
+            - docker images
+            - docker login --username $int_global_arti_user --password $int_global_arti_apikey $int_global_arti_url
+            - docker pull rtest1.jfrog.io/artifactory/test-docker/busybox
+            #- docker images
+            #- docker save gittalabs.jfrog.io/docker/busybox -o busybox.tar.gz
+            - ls -lah
 
             #- node ./app1.js >> tofile.txt
             #- echo "hello world" >> uploadme.txt 
