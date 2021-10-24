@@ -135,6 +135,9 @@ pipelines: # pipeline definition
 
             - docker images
             - docker login --username $int_global_arti_user --password $int_global_arti_apikey $int_global_arti_url
+
+            - cat spec.txt
+            - while read in; do chmod 755 "$in"; done < spec.txt
             #- docker pull rtest1.jfrog.io/test-docker/busybox:1.34.0
             #- docker pull rtest1.jfrog.io/test-docker/busybox:1.33.0
             #- docker images
