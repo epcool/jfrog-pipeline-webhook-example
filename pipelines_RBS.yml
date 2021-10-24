@@ -72,12 +72,10 @@ pipelines: # pipeline definition
             # get ret cmd & auth from bag
             - rest_get="${res_propertyBag_res_rb_info_restq}"
             - rest_auth="${res_propertyBag_res_auth_key}"
-            - echo $rb_info_restq
-            - echo $rest_auth
+            #- echo $rb_info_restq
+            #- echo $rest_auth
 
-            #- curl -u $rest_auth "$rest_get"
             - curl -u $rest_auth "$rest_get" | jq '.' > bundle.json
-            #- curl -u $rest_auth "$rest_get" | jq '.' > bundle.json | cat
             
             # get RB spev via REST
             - curl -u $rest_auth "$rest_get" | jq '.' | cat
@@ -97,6 +95,7 @@ pipelines: # pipeline definition
             - name: Arteplus
         execution:
           onStart:
+            # github path to get app script
             - res_path="${res_GitRepo_res_resourcePath}"
             - echo $res_path
             - cd $res_GitRepo_res_resourcePath
@@ -118,21 +117,11 @@ pipelines: # pipeline definition
 
             - docker images
             - docker login --username $int_global_arti_user --password $int_global_arti_apikey $int_global_arti_url
-
             - cat spec.txt
             #- while read in; do chmod 755 docker pull "$in"; done < spec.txt
             #- while read in; do chmod 755 "docker pull rtest1.jfrog.io/test-docker/busybox:1.34.0"; done < spec.txt
             #- while read in; do chmod 755 "${in}"; done < spec.txt
             - while read in; do ${in} ; done < spec.txt
-
-
-
-
-            #- docker pull rtest1.jfrog.io/test-docker/busybox:1.33.0
-            #- docker images
-            #- docker save rtest1.jfrog.io/test-docker/busybox:1.34.0 -o busybox1340.tar.gz 
-            #- docker save rtest1.jfrog.io/test-docker/busybox:1.33.0 -o busybox1330.tar.gz 
-
 
             - ls -lah
             - tar -czvf version.tgz *.tar.gz
