@@ -133,8 +133,8 @@ pipelines: # pipeline definition
             - docker save rtest1.jfrog.io/test-docker/busybox:1.33.0 -o busybox1330.tar.gz | gzip > version.tar.gz
 
             - ls -lah
-            - cd version
-            - ls -lah
+            - tar -tvf version.tar
+
 
             #- aws s3 mb s3://mybucket
             - aws s3 cp busybox1340.tar.gz Arteplus/busybox1340.tar.gz
