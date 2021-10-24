@@ -62,7 +62,7 @@ pipelines: # pipeline definition
         type: Bash
         configuration:
           inputSteps:
-          - name: get_rb_path
+          - name: Get_ReleaseBundle_Properties
           inputResources:
           - name: propertyBag_res
           - name: GitRepo_res
@@ -112,7 +112,7 @@ pipelines: # pipeline definition
         type: Bash
         configuration:
           inputSteps:
-            - name: get_bundle_info
+            - name: Get_Version_Spec
           inputResources:
             - name: propertyBag_spec
           integrations:
