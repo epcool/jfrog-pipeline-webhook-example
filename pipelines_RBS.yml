@@ -111,6 +111,10 @@ pipelines: # pipeline definition
             - name: Arteplus
         execution:
           onStart:
+            - res_path="${res_GitRepo_res_resourcePath}"
+            - echo $res_path
+            - cd $res_GitRepo_res_resourcePath
+            
             # install npm 14 on node machine
             - sudo chmod 1777 /tmp
             - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
