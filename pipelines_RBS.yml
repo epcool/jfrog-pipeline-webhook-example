@@ -21,22 +21,6 @@ resources: # resources needed for this pipeline
       rb_info_restq: ""
       auth_key: ""
 
- # - name: FileSpec_res
- #   type: FileSpec
- #   configuration:
- #     sourceArtifactory: global_arti
- #     target: 'C:\Jfrogcli'
- #     aql:   
- #       "'files':[
- #           {
- #             'aql': {
- #               'items.find': {
- #                 'release_artifact.release.name': 'demo-delete',
- #                 'release_artifact.release.version': '1.31'
- #               }
- #             }
- #           }
- #         ]"
 
 pipelines: # pipeline definition
 
@@ -113,6 +97,7 @@ pipelines: # pipeline definition
             # parse spec to get docker name & tag
                       
             - node ./app1.js
+            #- node ./app1.js >> tofile.txt
 
       - name: docker
         type: Bash
@@ -133,7 +118,7 @@ pipelines: # pipeline definition
             - docker save rtest1.jfrog.io/test-docker/busybox:1.33.0 -o busybox1330.tar.gz | gzip > version.tar.gz
 
             - ls -lah
-            - tar -tvf version.tar
+            - tar -tvf version.tar.gz
 
 
             #- aws s3 mb s3://mybucket
