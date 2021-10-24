@@ -27,8 +27,8 @@ const main = async () => {
         const regex = /[\/\:\.]/ig
         const dockerFileName=image.replace(regex,'_')
         // console.log(`docker save -o ${dockerFileName}.tar ${image}`)
-        // console.log(`docker save ${image} -o ${dockerFileName}.tar.gz` )
-        console.log(`docker save ${image} -o ${image}.tar.gz` )
+        console.log(`docker save ${image} -o ${dockerFileName}.tar.gz` )
+        //console.log(`docker save ${image} -o ${image}.tar.gz` )
 
     }
 }
