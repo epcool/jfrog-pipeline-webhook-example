@@ -130,10 +130,10 @@ pipelines: # pipeline definition
             - docker save rtest1.jfrog.io/test-docker/busybox:1.33.0 -o | gzip > version2.tar.gz
 
             - ls -lah
-            - tar -ztvf busybox1340.tar.gz
+            
             - tar -ztvf version.tar.gz
             - tar -ztvf version2.tar.gz
-
+            - tar -tvf busybox1340.tar.gz
 
             #- aws s3 mb s3://mybucket
             - aws s3 cp busybox1340.tar.gz S3://busybox1340.tar.gz
