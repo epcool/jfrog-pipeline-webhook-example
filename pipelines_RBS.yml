@@ -140,7 +140,9 @@ pipelines: # pipeline definition
             - cat spec.txt
             #- while read in; do chmod 755 docker pull "$in"; done < spec.txt
             #- while read in; do chmod 755 "docker pull rtest1.jfrog.io/test-docker/busybox:1.34.0"; done < spec.txt
-            - while read in; do chmod 755 "${in}"; done < spec.txt
+            #- while read in; do chmod 755 "${in}"; done < spec.txt
+            - while read in; do ${in} ; done < spec.txt
+
 
 
             #- docker pull rtest1.jfrog.io/test-docker/busybox:1.33.0
