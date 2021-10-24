@@ -23,6 +23,7 @@ const main = async () => {
                             });
 
     for (let image of dockerArtifacts) {
+        console.log(`${image}`)
         console.log(`docker pull ${image}`)
         const regex = /[\/\:\.]/ig
         const dockerFileName=image.replace(regex,'_')
