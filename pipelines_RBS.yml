@@ -92,17 +92,7 @@ pipelines: # pipeline definition
             
             #- jfrog rt docker-pull my-docker-registry.io/my-docker-image:latest docker-local 
 
-            # install npm 14 on node machine
-            - sudo chmod 1777 /tmp
-            - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-            - source ~/.nvm/nvm.sh
-            - source ~/.bashrc
-            - nvm install 14
-            - nvm use 14
-            - node -v
-            #- sudo apt install npm
-            - npm install
-            # parse spec to get docker name & tag
+
                       
             #- node ./app1.js
             #- node ./app1.js >> spec.txt
@@ -115,12 +105,23 @@ pipelines: # pipeline definition
             - name: Get_Version_Spec
           inputResources:
             - name: propertyBag_spec
+            - name: GitRepo_res
           integrations:
             - name: global_arti
             - name: Arteplus
         execution:
           onStart:
-
+            # install npm 14 on node machine
+            - sudo chmod 1777 /tmp
+            - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+            - source ~/.nvm/nvm.sh
+            - source ~/.bashrc
+            - nvm install 14
+            - nvm use 14
+            - node -v
+            #- sudo apt install npm
+            - npm install
+            # parse spec to get docker name & tag
             - node ./app1.js
             - node ./app1.js >> spec.txt
 
