@@ -117,6 +117,8 @@ pipelines: # pipeline definition
       - name: docker
         type: Bash
         configuration:
+         inputSteps:
+          - name: get_bundle_info
           integrations:
             - name: global_arti
         execution:
