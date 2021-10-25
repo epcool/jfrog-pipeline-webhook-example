@@ -120,7 +120,8 @@ pipelines: # pipeline definition
             - docker images
             - docker login --username $int_global_arti_user --password $int_global_arti_apikey $int_global_arti_url
             - cat spec.txt
-            - cat spec.txt | sed -n '0,10p' >> shortspec.txt
+            - cat spec.txt | sed -n '1,10p' >> shortspec.txt
+            
             - cat shortspec.txt
             - while read line; do ${line} ; done < shortspec.txt
 
