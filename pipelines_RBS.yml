@@ -77,7 +77,7 @@ pipelines: # pipeline definition
             #- echo $rb_info_restq
             #- echo $rest_auth
             
-            # get RB spev via REST
+            # get RB spec via REST
             - curl -u $rest_auth "$rest_get" | jq '.' > bundle.json
             #- curl -u $rest_auth "$rest_get" | jq '.' | cat
             
@@ -102,6 +102,9 @@ pipelines: # pipeline definition
             - cd $res_GitRepo_res_resourcePath
 
             - restore_run_files my_file bundle.json
+
+            - jfrog rt dl --spec bundle.json
+
             # install npm 14 on node machine
             - sudo chmod 1777 /tmp
             - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
@@ -115,8 +118,6 @@ pipelines: # pipeline definition
             # parse spec to get docker name & tag
             - node ./app.js
             - node ./app.js >> spec.txt
-
-            - jfrog rt dl --spec  bundle.json
 
             - docker images
             - docker login --username $int_global_arti_user --password $int_global_arti_apikey $int_global_arti_url
