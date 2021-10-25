@@ -117,7 +117,8 @@ pipelines: # pipeline definition
             - cat spec.txt
             - while read in; do ${in} ; done < spec.txt
             - ls -lah
-            - tar -czvf version.tgz *.tar.gz
+            #- tar -czvf version.tgz *.tar.gz
+            - tar -czvf version.tgz *.tar
             - ls -lah
             - tar -ztvf version.tgz
  
