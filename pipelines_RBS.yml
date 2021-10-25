@@ -61,8 +61,8 @@ pipelines: # pipeline definition
               #- regex="/[\/\:\.]/ig"
 
               #- ver_name= tmp.replace('\.','_')    
-              - tr '.' '_' <<<"$tmp"
-              - ver_name="${tmp}"
+              - tr '.' '_' <<<"$tmp" | ver_name
+              #- ver_name="${tmp}"
               - echo $tmp
               - echo $ver_name
               #- ver_name="${rb_name}"
