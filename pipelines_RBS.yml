@@ -122,7 +122,7 @@ pipelines: # pipeline definition
             - cat spec.txt
 
             #- x=1; while [ $x -le 5 ] && [ read in ]  ; do echo "Welcome $x times"; $(( x++ )) ; done < spec.txt
-            - x=1; while [ $x -le 5 ] ; do read in | ${in} ; $(( x++ )) ; done < spec.txt
+            - x=1; while [ $x -le 5 ] ; do read in | ${in} ; $(( x++ )) ; done < spec.txt     
 
 
             do ${read in}
