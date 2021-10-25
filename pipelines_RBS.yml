@@ -131,7 +131,7 @@ pipelines: # pipeline definition
             #- tar -czvf version.tgz *.tar.gz
 
             - ver_name="${res_propertyBag_version_version_name}"
-            - tar -czvf "${ver_name}.tgz *.tar
+            - tar -czvf "${ver_name}.tgz" *.tar
             #- tar -czvf "version".tgz *.tar
             - ls -lah
             - tar -ztvf version.tgz
