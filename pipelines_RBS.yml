@@ -65,6 +65,8 @@ pipelines: # pipeline definition
               - echo $ver_name
 
               - write_output propertyBag_version version_name=${ver_name}  
+
+              - write_output propertyBag_version version_name tr '.' '_' <<<"$tmp"
                        
       - name: Get_Version_Spec
         type: Bash
