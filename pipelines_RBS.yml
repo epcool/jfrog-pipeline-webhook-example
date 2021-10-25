@@ -120,27 +120,10 @@ pipelines: # pipeline definition
             - docker images
             - docker login --username $int_global_arti_user --password $int_global_arti_apikey $int_global_arti_url
             - cat spec.txt
-            - cat spec.txt | sed -n '1,10p' >> shortspec.txt
+            - cat spec.txt | sed -n '1,8p' >> shortspec.txt
             
             - cat shortspec.txt
             - while read line; do ${line} ; done < shortspec.txt
-
-            #- x=1; while [ $x -le 5 ] && [ read in ]  ; do echo "Welcome $x times"; $(( x++ )) ; done < spec.txt
-            #- x=1; while [ $x -le 5 ] ; do read in | ${in} ; $(( x++ )) ; done < spec.txt     
-
-
-           ## do ${read in}
-            #- x=1; while [ $x -le 5 ] && [ read in ]  ; do echo "Welcome $x times" $(( x++ )) ; done < spec.txt
-            #${in}
-
-            #- x=1; while read in; do ${in}  $(( x++ ))  echo "count $x" if [[ $x -le 5 ]]  then  break  fi  ; done < spec.txt
-
-            #- COUNTER=20
-            #- until [  $COUNTER -lt 10 ]; do  read in ${in} let $COUNTER-=1  ; done < spec.txt
-            #- until [  $COUNTER -lt 10 ]; do  read in ${in}  $(( COUNTER-- ))  ; done < spec.txt
-           
-
-            #- while read line; do ${line} ; done < spec.txt
             - ls -lah
      
             # creat zip file with all docker images
