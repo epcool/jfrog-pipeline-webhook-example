@@ -37,8 +37,8 @@ pipelines: # pipeline definition
           inputResources:
             - name: incoming_webhook_RB_signed_res
           outputResources:
-            - name: propertyBag_res
             - name: propertyBag_version
+            - name: propertyBag_res
           integrations:
            - name: global_arti
            
