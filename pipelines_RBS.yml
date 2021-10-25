@@ -60,8 +60,9 @@ pipelines: # pipeline definition
               - tmp="${rb_name}_${rb_ver}"  
               #- regex="/[\/\:\.]/ig"
 
-              - ver_name= tmp.replace('\.','_')    
-
+              #- ver_name= tmp.replace('\.','_')    
+              - tr '.' '_' <<<"$tmp"
+              - ver_name="${tmp}"
               #- ver_name="${rb_name}"
               - write_output propertyBag_version version_name=${ver_name}  
                        
