@@ -121,7 +121,7 @@ pipelines: # pipeline definition
             - docker login --username $int_global_arti_user --password $int_global_arti_apikey $int_global_arti_url
             - cat spec.txt
 
-            - x=1; while [ $x -le 5 ] && read in ; do echo "Welcome $x times" $(( x++ )); done < spec.txt
+            - x=1; while [ $x -le 5 ]  ; do echo "Welcome $x times" $(( x++ )); done < spec.txt
             #- COUNTER=20
             #- until [  $COUNTER -lt 10 ]; do  read in ${in} let $COUNTER-=1  ; done < spec.txt
             #- until [  $COUNTER -lt 10 ]; do  read in ${in}  $(( COUNTER-- ))  ; done < spec.txt
