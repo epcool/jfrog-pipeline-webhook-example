@@ -58,11 +58,11 @@ pipelines: # pipeline definition
               - write_output propertyBag_res auth_key=${rest_auth}
 
               - tmp="${rb_name}_${rb_ver}"  
-                    
+              -                     
               #- tr '.' '_' <<<"$tmp" > $ver_name
               #- tr '.' '_' <<<"$tmp" | $ver_name
               - tr '.' '_' <<<"$tmp" 
-              - "$tmp" | tr '.' '_' | ver_name
+              - $tmp | tr '.' '_' | ver_name
 
               #- tr '.' '_' <<<"$tmp" > ver_name
               #- ver_name="${tmp}"
