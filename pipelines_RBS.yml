@@ -67,7 +67,7 @@ pipelines: # pipeline definition
           - name: Get_ReleaseBundle_Properties
           inputResources:
           - name: propertyBag_res
-          - name: GitRepo_res
+          #- name: GitRepo_res
           integrations:
           - name: global_arti
           
