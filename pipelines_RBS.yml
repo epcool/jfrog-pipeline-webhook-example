@@ -59,14 +59,14 @@ pipelines: # pipeline definition
 
               - tmp="${rb_name}_${rb_ver}"  
 
-              - tr '.' '_' <<<"$tmp" 
-
+              
+              - ver_name=${tr '.' '_' <<<"$tmp"}
               - echo $tmp
               - echo $ver_name
 
               - write_output propertyBag_version version_name=${ver_name}  
 
-              - write_output propertyBag_version version_name tr '.' '_' <<<"$tmp"
+
                        
       - name: Get_Version_Spec
         type: Bash
