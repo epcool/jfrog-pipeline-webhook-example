@@ -61,7 +61,9 @@ pipelines: # pipeline definition
                     
               #- tr '.' '_' <<<"$tmp" > $ver_name
               #- tr '.' '_' <<<"$tmp" | $ver_name
-               - ver_name=tr '.' '_' <<<"$tmp" 
+              - tr '.' '_' <<<"$tmp" 
+              - "$tmp" | tr '.' '_' | ver_name
+
               #- tr '.' '_' <<<"$tmp" > ver_name
               #- ver_name="${tmp}"
               - echo $tmp
