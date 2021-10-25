@@ -6,8 +6,8 @@ console.log(`Helo`)
 const main = async () => {
     const data = JSON.parse(await fs.readFile(filename));
     const { artifacts } = data;
-    const dockerArtifacts = artifacts.filter(a=>a.sourceRepoPath?.endsWith('manifest.json'))
-                            .map(a=>a.sourceRepoPath
+    const dockerArtifacts = artifacts.filter(a=>a.targetRepoPath?.endsWith('manifest.json'))
+                            .map(a=>a.targetRepoPath
                             .split('/'))
                             .map(a=>{
                                 // remove file name
