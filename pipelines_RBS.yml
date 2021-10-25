@@ -57,8 +57,12 @@ pipelines: # pipeline definition
               - write_output propertyBag_res rb_info_restq=${rest_get}
               - write_output propertyBag_res auth_key=${rest_auth}
 
-              #- ver_name="${rb_name}_${rb_ver}"  
-              - ver_name="${rb_name}"
+              - tmp="${rb_name}_${rb_ver}"  
+              - regex = /[\/\:\.]/ig
+
+              - ver_name = tmp.replace(regex,'_') 
+
+              #- ver_name="${rb_name}"
               - write_output propertyBag_version version_name=${ver_name}  
                        
       - name: Get_Version_Spec
@@ -141,9 +145,6 @@ pipelines: # pipeline definition
 
 
             #- tar -ztvf version.tgz
- #const regex = /[\/\:\.]/ig
-
-  #      const tmp = image.split('/').pop()
 
 
 
