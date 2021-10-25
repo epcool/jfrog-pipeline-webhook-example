@@ -21,7 +21,7 @@ const main = async () => {
         console.log(`docker pull ${image}`)
         const regex = /[\/\:\.]/ig
 
-        const tmp = dockerFileName.split('/').pop()
+        const tmp = image.split('/').pop()
         const tarName =tmp.replace(regex,'_')      
         console.log(`docker save -o ${tarName}.tar ${image}`)
 
