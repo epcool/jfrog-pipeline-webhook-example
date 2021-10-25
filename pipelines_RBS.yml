@@ -137,8 +137,13 @@ pipelines: # pipeline definition
  
             #- tar -czvf "version".tgz *.tar
             - ls -lah
-            - tar -ztvf version.tgz
- 
+            - tar -ztvf ${ver_name}
+
+
+            #- tar -ztvf version.tgz
+ #const regex = /[\/\:\.]/ig
+
+  #      const tmp = image.split('/').pop()
 
 
 
