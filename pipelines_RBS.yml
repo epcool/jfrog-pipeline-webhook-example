@@ -58,10 +58,10 @@ pipelines: # pipeline definition
               - write_output propertyBag_res auth_key=${rest_auth}
 
               - tmp="${rb_name}_${rb_ver}"  
-              #- regex="/[\/\:\.]/ig"
-
-              #- ver_name= tmp.replace('\.','_')    
-              - tr '.' '_' <<<"$tmp" > $ver_name
+                    
+              #- tr '.' '_' <<<"$tmp" > $ver_name
+              #- tr '.' '_' <<<"$tmp" | $ver_name
+               - ver_name <<< tr '.' '_' <<<"$tmp" 
               #- ver_name="${tmp}"
               - echo $tmp
               - echo $ver_name
