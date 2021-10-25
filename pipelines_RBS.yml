@@ -122,9 +122,8 @@ pipelines: # pipeline definition
             - cat spec.txt
 
 
-
             - COUNTER=20
-            - until [  $COUNTER -lt 10 ]; do  read in ${in} let COUNTER-=1  ; done < spec.txt
+            - until [  $COUNTER -lt 10 ]; do  read in ${in} let $COUNTER-=1  ; done < spec.txt
 
             #- while read in; do ${in} ; done < spec.txt
             - ls -lah
