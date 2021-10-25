@@ -21,6 +21,12 @@ resources: # resources needed for this pipeline
       rb_info_restq: ""
       auth_key: ""
 
+  - name: propertyBag_version # properety bag for transfering data between steps
+    type: PropertyBag
+    configuration:
+     version_name: ""
+
+
 pipelines: # pipeline definition
 
   - name: incoming_webhook_RBS_pipe
@@ -32,6 +38,7 @@ pipelines: # pipeline definition
             - name: incoming_webhook_RB_signed_res
           outputResources:
             - name: propertyBag_res
+            - name: propertyBag_version
           integrations:
            - name: global_arti
            
@@ -49,6 +56,9 @@ pipelines: # pipeline definition
               # wrtie to propery bag for next pipe step  
               - write_output propertyBag_res rb_info_restq=${rest_get}
               - write_output propertyBag_res auth_key=${rest_auth}
+
+              - ver_name= "${rb_name}_${rb_ver}
+              - write_output propertyBag_version version_name=${ver_name}
                        
       - name: Get_Version_Spec
         type: Bash
@@ -87,6 +97,7 @@ pipelines: # pipeline definition
             - name: Get_Version_Spec
           inputResources:
             - name: GitRepo_res
+            - name: propertyBag_version
           integrations:
             - name: global_arti
             - name: Arteplus
@@ -118,7 +129,10 @@ pipelines: # pipeline definition
             - while read in; do ${in} ; done < spec.txt
             - ls -lah
             #- tar -czvf version.tgz *.tar.gz
-            - tar -czvf version.tgz *.tar
+
+            - ver_name= "${res_propertyBag_version_version_name}"
+            - tar -czvf "${ver_name}.tgz *.tar
+            #- tar -czvf "version".tgz *.tar
             - ls -lah
             - tar -ztvf version.tgz
  
