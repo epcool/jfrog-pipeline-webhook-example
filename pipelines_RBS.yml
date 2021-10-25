@@ -26,7 +26,6 @@ resources: # resources needed for this pipeline
     configuration:
       version_name: ""
 
-
 pipelines: # pipeline definition
 
   - name: incoming_webhook_RBS_pipe
@@ -56,35 +55,22 @@ pipelines: # pipeline definition
               # wrtie to propery bag for next pipe step  
               - write_output propertyBag_res rb_info_restq=${rest_get}
               - write_output propertyBag_res auth_key=${rest_auth}
-
-              - tmp="${rb_name}_${rb_ver}"  
-
-              
+              # wrtie to propery bag for 3rd pipe step 
+              - tmp="${rb_name}_${rb_ver}"              
               - ver_name=$(tr '.' '_' <<<"$tmp")
-              - echo $tmp
-              - echo $ver_name
-
               - write_output propertyBag_version version_name=${ver_name}  
-
-
                        
       - name: Get_Version_Spec
         type: Bash
         configuration:
-          #inputSteps:
-          #- name: Get_ReleaseBundle_Properties
           inputResources:
           - name: propertyBag_res
-          #- name: GitRepo_res
           integrations:
           - name: global_arti
           
         execution:
           onExecute:
-            #- res_path="${res_GitRepo_res_resourcePath}"
-            #- echo $res_path
-            #- cd $res_GitRepo_res_resourcePath
-            
+           
             # get ret cmd & auth from bag
             - rest_get="${res_propertyBag_res_rb_info_restq}"
             - rest_auth="${res_propertyBag_res_auth_key}"
@@ -93,7 +79,7 @@ pipelines: # pipeline definition
             
             # get RB spev via REST
             - curl -u $rest_auth "$rest_get" | jq '.' > bundle.json
-            - curl -u $rest_auth "$rest_get" | jq '.' | cat
+            #- curl -u $rest_auth "$rest_get" | jq '.' | cat
             
             - ls -lah
             - add_run_files bundle.json my_file
@@ -108,7 +94,6 @@ pipelines: # pipeline definition
             - name: propertyBag_version
           integrations:
             - name: global_arti
-            - name: Arteplus
         execution:
           onStart:
             # github path to get app script
@@ -136,27 +121,11 @@ pipelines: # pipeline definition
             - cat spec.txt
             - while read in; do ${in} ; done < spec.txt
             - ls -lah
-            #- tar -czvf version.tgz *.tar.gz
-
+     
+            # creat zip file with all docker images
             - ver_name="${res_propertyBag_version_version_name}.tgz"
-            - echo $ver_name
             - tar -czvf ${ver_name} *.tar
- 
-            #- tar -czvf "version".tgz *.tar
-            - ls -lah
-            - tar -ztvf ${ver_name}
-
-
-            #- tar -ztvf version.tgz
-
-
-
-            #- aws s3 mb s3://mybucket
-            #- aws s3 cp busybox1340.tar.gz S3://busybox1340.tar.gz
-            #- aws s3 ls s3://Arteplus
-            # | gzip > myimage_latest.tar.gz
             
-            #- node ./app1.js >> tofile.txt
-            #- echo "hello world" >> uploadme.txt 
-            #- aws s3 cp uploadme.txt s3://testS3/uploadme.txt
-            #- aws s3 ls s3://testS3/
+            - ls -lah
+            - echo $ver_name
+            - tar -ztvf ${ver_name}
