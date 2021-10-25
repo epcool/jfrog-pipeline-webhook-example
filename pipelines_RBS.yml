@@ -58,17 +58,12 @@ pipelines: # pipeline definition
               - write_output propertyBag_res auth_key=${rest_auth}
 
               - tmp="${rb_name}_${rb_ver}"  
-              -                     
-              #- tr '.' '_' <<<"$tmp" > $ver_name
-              #- tr '.' '_' <<<"$tmp" | $ver_name
-              - tr '.' '_' <<<"$tmp" 
-              #- $tmp | tr '.' '_' | ver_name
 
-              #- tr '.' '_' <<<"$tmp" > ver_name
-              #- ver_name="${tmp}"
+              - tr '.' '_' <<<"$tmp" 
+
               - echo $tmp
               - echo $ver_name
-              #- ver_name="${rb_name}"
+
               - write_output propertyBag_version version_name=${ver_name}  
                        
       - name: Get_Version_Spec
