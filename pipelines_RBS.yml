@@ -116,6 +116,8 @@ pipelines: # pipeline definition
             - node ./app.js
             - node ./app.js >> spec.txt
 
+            - jfrog rt dl --spec  bundle.json
+
             - docker images
             - docker login --username $int_global_arti_user --password $int_global_arti_apikey $int_global_arti_url
             - cat spec.txt
