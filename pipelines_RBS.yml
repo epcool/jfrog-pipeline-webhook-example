@@ -58,9 +58,9 @@ pipelines: # pipeline definition
               - write_output propertyBag_res auth_key=${rest_auth}
 
               - tmp="${rb_name}_${rb_ver}"  
-              - regex= "/[\/\:\.]/ig"
+              #- regex="/[\/\:\.]/ig"
 
-              - ver_name = tmp.replace(regex,'_') 
+              - ver_name= tmp.replace('\.','_') 
 
               #- ver_name="${rb_name}"
               - write_output propertyBag_version version_name=${ver_name}  
