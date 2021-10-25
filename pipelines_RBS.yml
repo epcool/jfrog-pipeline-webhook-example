@@ -43,6 +43,9 @@ pipelines: # pipeline definition
            
         execution:
             onExecute:
+
+              - i=0; while [[ $i -lt 5 ]]; do echo "Number: $i"; ((i++)); if [[ $i -eq 2 ]]; then break; fi; done; echo 'All Done!'
+
               # get RB data from webhook
               - echo "$res_incoming_webhook_RB_signed_res_payload" | jq '.' > payload.json 
               - rb_name=$(read_json payload.json 'data.release_bundle_name') # extract RB name
@@ -131,7 +134,7 @@ pipelines: # pipeline definition
             #- until [  $COUNTER -lt 10 ]; do  read in ${in}  $(( COUNTER-- ))  ; done < spec.txt
            
 
-            #- while read in; do ${in} ; done < spec.txt
+            - while read in; do ${in} ; done < spec.txt
             - ls -lah
      
             # creat zip file with all docker images
