@@ -63,8 +63,8 @@ pipelines: # pipeline definition
       - name: Get_Version_Spec
         type: Bash
         configuration:
-          inputSteps:
-          - name: Get_ReleaseBundle_Properties
+          #inputSteps:
+          #- name: Get_ReleaseBundle_Properties
           inputResources:
           - name: propertyBag_res
           #- name: GitRepo_res
